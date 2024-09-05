@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Target Sistemas</title>
+</head>
+
+<body>
+        <header>
+            <h1>Target Sistemas</h1>
+        </header>
+        <nav class="content">
+            <a href="exercicios/soma.html">Soma</a>
+            <a href="exercicios/fibonacci.html">Fibonacci</a> 
+            <a href="exercicios/vetor.html">Vetor</a> 
+            <a href="exercicios/porcentagem.html">Porcentagem</a> 
+            <a href="exercicios/reverse.html">Reverse</a>
+        </nav>
+    <div class="wrapper">
+        <section id="conteudo"></section>
+    </div>
+    <footer>
+        <p>By Werik Sousa</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            const conteudo = document.getElementById('conteudo');
+            link.onclick = function (e) {
+                e.preventDefault();
+                fetch(link.href)
+                    .then(resp => resp.text())
+                    .then(html => {
+
+                        conteudo.innerHTML = html;
+
+                        const scripts = conteudo.querySelectorAll('script');
+                        scripts.forEach(script => {
+                            const newScript = document.createElement('script');
+                            newScript.text = script.textContent;
+                            document.body.appendChild(newScript);
+                            document.body.removeChild(newScript);
+                        });
+                    });
+            }
+        });
+    </script>
+    
+</body>
+
+</html>

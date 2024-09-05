@@ -1,0 +1,36 @@
+<h2>Faturamento Diário - Análise</h2>
+
+<div class="resultados">
+    <p><strong>Menor Faturamento:</strong> <span id="menor-faturamento"></span></p>
+    <p><strong>Maior Faturamento:</strong> <span id="maior-faturamento"></span></p>
+    <p><strong>Dias com Faturamento Acima da Média:</strong> <span id="dias-acima-da-media"></span></p>
+</div>
+
+<script>
+    function fetchData() {
+        fetch('dados.json')
+            .then(response => response.json())
+            .then(data => calcularFaturamento(data));
+    }
+
+    function calcularFaturamento(faturamentoDiario) {
+        const faturamentosValidos = faturamentoDiario
+            .filter(item => item.valor > 0)
+            .map(item => item.valor);
+
+        const menorFaturamento = Math.min(...faturamentosValidos);
+        const maiorFaturamento = Math.max(...faturamentosValidos);
+        const somaFaturamento = faturamentosValidos.reduce((acc, valor) => acc + valor, 0);
+        const mediaMensal = somaFaturamento / faturamentosValidos.length;
+
+        const diasAcimaDaMedia = faturamentoDiario
+            .filter(item => item.valor > mediaMensal)
+            .length;
+
+        document.getElementById('menor-faturamento').innerText = menorFaturamento.toFixed(2);
+        document.getElementById('maior-faturamento').innerText = maiorFaturamento.toFixed(2);
+        document.getElementById('dias-acima-da-media').innerText = diasAcimaDaMedia;
+    }
+
+    fetchData();
+</script>

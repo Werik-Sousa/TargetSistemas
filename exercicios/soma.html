@@ -1,0 +1,22 @@
+<h2>Estágio - São Paulo</h2>
+
+<p>Observe o trecho de código abaixo: int INDICE = 13, SOMA = 0, K = 0;
+    <br>
+    Enquanto K < INDICE faça  K = K + 1; SOMA = SOMA + K; <br>
+    Imprimir(SOMA); </p>
+<p> Ao final do processamento, qual será o valor da variável SOMA? </p>
+<p id="resultadoSoma" style="color:#fff"></p>
+
+<script>
+    function calcularSoma() {
+        let INDICE = 13, SOMA = 0, K = 0;
+        while (K < INDICE) {
+            K = K + 1;
+            SOMA = SOMA + K;
+        }
+
+        document.getElementById("resultadoSoma").textContent = `O valor da variável SOMA é: ${SOMA}`;
+    }
+    
+    calcularSoma();
+</script>
